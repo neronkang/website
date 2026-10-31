@@ -57,7 +57,7 @@ Ces certificats peuvent être fournis de différentes manières :
 
   - En utilisant la Google Container Registry
     - par cluster
-    - automatiqueent configuré dans Google Compute Engine ou Google Kubernetes Engine
+    - automatiquement configuré dans Google Compute Engine ou Google Kubernetes Engine
     - tous les pods peuvent lire le registre privé du projet
   - En utilisant Amazon Elastic Container Registry (ECR)
     - utilise les rôles et politiques IAM pour contrôler l'accès aux dépôts ECR
