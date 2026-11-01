@@ -1258,7 +1258,7 @@ spec:
 
 {{< feature-state feature_gate_name="DeploymentReplicaSetTerminatingReplicas" >}}
 
-Ви можете бачити Podʼи, що завершують роботу, лише якщо [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `DeploymentReplicaSetTerminatingReplicas` увімкнено на [API-сервері](/docs/reference/command-line-tools-reference/kube-apiserver/) та в [kube-controller-manager](/docs/reference/command-line-tools-reference/kube-controller-manager/)
+Ви можете бачити Podʼи, що завершують роботу, лише якщо функціональну можливість [`DeploymentReplicaSetTerminatingReplicas`](/docs/reference/command-line-tools-reference/feature-gates/#DeploymentReplicaSetTerminatingReplicas) увімкнено на [API-сервері](/docs/reference/command-line-tools-reference/kube-apiserver/) та в [kube-controller-manager](/docs/reference/command-line-tools-reference/kube-controller-manager/)
 
 Podʼи, що завершують роботу через видалення або зменшення масштабу, можуть завершуватися тривалий час і впродовж цього періоду споживати додаткові ресурси. Як наслідок, загальна кількість усіх Podʼів може тимчасово перевищити `.spec.replicas`. Podʼи, що завершують роботу, можна відстежувати за допомогою поля `.status.terminatingReplicas` в Deployment.
 
