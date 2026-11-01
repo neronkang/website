@@ -56,7 +56,7 @@ spec:
 
 ### Статус {#status}
 
-Схема API `CompositePodGroup` включає субресурс `status`. В альфа-версії поле `status` присутнє в типі API, але `kube-scheduler` не оновлює та не заповнює умови статусу для обʼєктів `CompositePodGroup`. Відстеження статусу для складених груп буде реалізовано в майбутніх випусках.
+Схема API `CompositePodGroup` включає субресурс `status`. В альфа-версії поле `status` присутнє в типі API, але `kube-scheduler` не оновлює та не заповнює стани статусу для обʼєктів `CompositePodGroup`. Відстеження статусу для складених груп буде реалізовано в майбутніх випусках.
 
 ## Створення CompositePodGroup {#creating-a-compositepodgroup}
 
