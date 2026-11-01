@@ -67,7 +67,7 @@ spec:
 
   <!-- OK to remove this note once v1.29 Kubernetes is out of support -->
   {{< note >}}
-  До Kubernetes v1.30 поле `minDomains` було доступне лише за умови, що [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates-removed/) `MinDomainsInPodTopologySpread` увімкнено (стандартно увімкнена починаючи з v1.28). У старіших кластерах Kubernetes її може бути явно вимкнено, або поле може бути недоступним.
+  До Kubernetes v1.30 поле `minDomains` було доступне лише за умови, що функціональну можливість [`MinDomainsInPodTopologySpread`](/docs/reference/command-line-tools-reference/feature-gates-removed/#MinDomainsInPodTopologySpread) увімкнено (стандартно увімкнена починаючи з v1.28). У старіших кластерах Kubernetes її може бути явно вимкнено, або поле може бути недоступним.
   {{< /note >}}
 
   - Значення `minDomains` має бути більшим за 0, якщо його вказано. Ви можете вказати `minDomains` лише разом із `whenUnsatisfiable: DoNotSchedule`.
@@ -104,9 +104,9 @@ spec:
   ```
 
   {{< note >}}
-  Поле `matchLabelKeys` є полем рівня бета і стандартно увімкнене у 1.27. Ви можете вимкнути його, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodTopologySpread`.
+  Поле `matchLabelKeys` є полем рівня бета і стандартно увімкнене у 1.27. Ви можете вимкнути його, вимкнувши функціональну можливість [`MatchLabelKeysInPodTopologySpread`](/docs/reference/command-line-tools-reference/feature-gates/#MatchLabelKeysInPodTopologySpread).
 
-  До v1.34 `matchLabelKeys` оброблявся неявно. Починаючи з v1.34, мітки ключ-значення, що відповідають `matchLabelKeys`, явно обʼєднуються з `labelSelector`. Ви можете вимкнути це й повернутися до попередньої поведінки, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodTopologySpreadSelectorMerge` у kube-apiserver.
+  До v1.34 `matchLabelKeys` оброблявся неявно. Починаючи з v1.34, мітки ключ-значення, що відповідають `matchLabelKeys`, явно обʼєднуються з `labelSelector`. Ви можете вимкнути це й повернутися до попередньої поведінки, вимкнувши функціональну можливість [`MatchLabelKeysInPodTopologySpreadSelectorMerge`](/docs/reference/command-line-tools-reference/feature-gates/#MatchLabelKeysInPodTopologySpreadSelectorMerge) у kube-apiserver.
   {{< /note >}}
 
 - **nodeAffinityPolicy** вказує, як ми будемо обробляти nodeAffinity/nodeSelector Podʼа під час обчислення перекосу топології розміщення Podʼів. Варіанти:
@@ -116,7 +116,7 @@ spec:
   Якщо це значення є null, поведінка еквівалентна політиці Honor.
 
   {{< note >}}
-  Поле `nodeAffinityPolicy` було полем рівня бета з v1.26 і стало загальнодоступним (GA) у v1.33. У бета-версії воно стандартно увімкнене, і ви можете вимкнути його, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
+  Поле `nodeAffinityPolicy` було полем рівня бета з v1.26 і стало загальнодоступним (GA) у v1.33. У бета-версії воно стандартно увімкнене, і ви можете вимкнути його, вимкнувши функціональну можливість [`NodeInclusionPolicyInPodTopologySpread`](/docs/reference/command-line-tools-reference/feature-gates/#NodeInclusionPolicyInPodTopologySpread).
   {{< /note >}}
 
 - **nodeTaintsPolicy** вказує, як ми будемо обробляти taints вузлів під час обчислення перекосу топології розміщення Podʼів. Варіанти:
@@ -126,7 +126,7 @@ spec:
   Якщо це значення є null, поведінка еквівалентна політиці Ignore.
 
   {{< note >}}
-  Поле `nodeTaintsPolicy` було полем рівня бета з v1.26 і стало загальнодоступним (GA) у v1.33. У бета-версії воно стандартно увімкнене, і ви можете вимкнути його, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
+  Поле `nodeTaintsPolicy` було полем рівня бета з v1.26 і стало загальнодоступним (GA) у v1.33. У бета-версії воно стандартно увімкнене, і ви можете вимкнути його, вимкнувши функціональну можливість [`NodeInclusionPolicyInPodTopologySpread`](/docs/reference/command-line-tools-reference/feature-gates/#NodeInclusionPolicyInPodTopologySpread).
   {{< /note >}}
 
 Коли Pod визначає більше одного `topologySpreadConstraint`, ці обмеження поєднуються за допомогою логічної операції AND: kube-scheduler шукає для вхідного Podʼа вузол, який задовольняє всі налаштовані обмеження.
