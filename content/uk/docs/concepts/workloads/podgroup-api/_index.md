@@ -84,13 +84,13 @@ spec:
 
 ### Статус {#status}
 
-Планувальник оновлює `status.conditions`, щоб повідомити, чи група була успішно запланована. Основною умовою є `PodGroupInitiallyScheduled`, яка є `True`, коли всі необхідні Podʼи були розміщені, і `False`, коли планування не вдається.
+Планувальник оновлює `status.conditions`, щоб повідомити, чи група була успішно запланована. Основним станом є `PodGroupInitiallyScheduled`, який є `True`, коли всі необхідні Podʼи були розміщені, і `False`, коли планування не вдається.
 
 {{< note >}}
-Умова `PodGroupInitiallyScheduled` відображає лише початкове рішення планувальника. Планувальник не оновлює її, якщо Podʼи пізніше зазнають збою або будуть виселені. Детальніше див. у розділі [Обмеження](/docs/concepts/workloads/podgroup-api/lifecycle/#limitations).
+Стан `PodGroupInitiallyScheduled` відображає лише початкове рішення планувальника. Планувальник не оновлює її, якщо Podʼи пізніше зазнають збою або будуть виселені. Детальніше див. у розділі [Обмеження](/docs/concepts/workloads/podgroup-api/lifecycle/#limitations).
 {{< /note >}}
 
-Див. сторінку [Життєвий цикл PodGroup](/docs/concepts/workloads/podgroup-api/lifecycle/#podgroup-status) для повного списку умов та причин.
+Див. сторінку [Життєвий цикл PodGroup](/docs/concepts/workloads/podgroup-api/lifecycle/#podgroup-status) для повного списку станів та причин.
 
 ## Створення PodGroup {#creating-a-podgroup}
 
@@ -116,7 +116,7 @@ spec:
 kubectl get podgroups
 ```
 
-Щоб побачити повний статус, включаючи умови планування:
+Щоб побачити повний статус, включаючи стани планування:
 
 ```shell
 kubectl describe podgroup training-worker-0
