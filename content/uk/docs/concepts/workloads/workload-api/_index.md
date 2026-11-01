@@ -13,7 +13,7 @@ simple_list: true
 
 ## Що таке Workload? {#what-is-a-workload}
 
-Ресурс API Workload є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1beta1`, і ваш кластер повинен мати цю групу API увімкненою, а також [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `GenericWorkload`, перш ніж ви зможете скористатися цим API.
+Ресурс API Workload є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1beta1`, і ваш кластер повинен мати цю групу API увімкненою, а також функціональну можливість [`GenericWorkload`](/docs/reference/command-line-tools-reference/feature-gates/#GenericWorkload), перш ніж ви зможете скористатися цим API.
 
 `Workload` є статичним, довгоживучим шаблоном політики. Він визначає, які політики планування слід застосовувати до груп Podʼів, але самостійно не відстежує стан виконання. Стан виконання планування підтримується обʼєктами [PodGroup](/docs/concepts/workloads/podgroup-api/), які контролери створюють з `PodGroupTemplates` ресурсу `Workload`.
 
@@ -132,7 +132,7 @@ spec:
 
 {{< feature-state feature_gate_name="WorkloadWithJob" >}}
 
-Коли функціональна можливість [`WorkloadWithJob`](/docs/reference/command-line-tools-reference/feature-gates/) увімкнена, контролер [Job](/docs/concepts/workloads/controllers/job/) компілює конфігурацію `.spec.scheduling` обʼєкта Job в обʼєкти `Workload` та `PodGroup` перед тим, як створити будь-які Podʼи. Ви вмикаєте групове планування, встановивши `.spec.scheduling.schedulingPolicy.gang` у Job; пропущений `gang.minCount` стандартно дорівнює `.spec.parallelism` обʼєкта Job, тому всі Podʼи мають бути придатними для планування одночасно, перш ніж будь-який з них буде привʼязаний до вузлів.
+Коли функціональна можливість [`WorkloadWithJob`](/docs/reference/command-line-tools-reference/feature-gates/#WorkloadWithJob) увімкнена, контролер [Job](/docs/concepts/workloads/controllers/job/) компілює конфігурацію `.spec.scheduling` обʼєкта Job в обʼєкти `Workload` та `PodGroup` перед тим, як створити будь-які Podʼи. Ви вмикаєте групове планування, встановивши `.spec.scheduling.schedulingPolicy.gang` у Job; пропущений `gang.minCount` стандартно дорівнює `.spec.parallelism` обʼєкта Job, тому всі Podʼи мають бути придатними для планування одночасно, перш ніж будь-який з них буде привʼязаний до вузлів.
 
 Коли `.spec.scheduling` пропущено, Job стандартно використовує політику `basic`, яка зберігає звичайне планування Pod за Podʼом. У будь-якому випадку контролер Job створює `Workload` та `PodGroup` за вас, тому вам не потрібно створювати їх самостійно. Інші контролери робочих навантажень (наприклад, JobSet) можуть самостійно керувати своїми обʼєктами `Workload` та `PodGroup`.
 
