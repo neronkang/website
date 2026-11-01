@@ -107,7 +107,7 @@ Podʼи, ресурси робочих навантажень та Services є �
 * Прапорці `--kube-reserved`, `--system-reserved` та `--eviction-hard` оновлюють [NodeAllocatable](/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable)
 * Виселення за допомогою `--enforce-node-allocable` не реалізовано
 * Під час роботи на вузлі Windows kubelet не має обмежень памʼяті або CPU. `--kube-reserved` та `--system-reserved` лише віднімаються від `NodeAllocatable` і не гарантують ресурсів для робочих навантажень. Докладніше дивіться в розділі [Керування ресурсами для вузлів Windows](/docs/concepts/configuration/windows-resource-management/#resource-reservation).
-* Умову `PIDPressure` не реалізовано
+* Стан `PIDPressure` не реалізовано
 * kubelet не вживає дій щодо виселення через OOM
 
 ### Сумісність API {#api}
