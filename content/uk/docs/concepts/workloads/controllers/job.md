@@ -265,7 +265,7 @@ kubectl logs jobs/pi
 
 {{< feature-state feature_gate_name="WorkloadWithJob" >}}
 
-Коли функціональну можливість [`WorkloadWithJob`](/docs/reference/command-line-tools-reference/feature-gates/#WorkloadWithJob) увімкнено, контролер Job компілює конфігурацію `.spec.scheduling` Job в обʼєкти [Workload](/docs/concepts/workloads/workload-api/) та [PodGroup](/docs/concepts/workloads/podgroup-api/) (`scheduling.k8s.io/v1beta1`) перед створенням будь-яких Podʼів. Це дозволяє вам виражати явний намір планування для Job, такий як [групове планування](/docs/concepts/scheduling-eviction/gang-scheduling/) (всі Podʼи плануються разом або жодного), спільне розташування за топологією та поведінку під час переривань роботи.
+Коли функціональну можливість [`WorkloadWithJob`](/docs/reference/command-line-tools-reference/feature-gates/#WorkloadWithJob) увімкнено, контролер Job компілює конфігурацію `.spec.scheduling` Job в обʼєкти [Workload](/docs/concepts/workloads/workload-api/) та [PodGroup](/docs/concepts/workloads/podgroup-api/) (`scheduling.k8s.io/v1beta1`) перед створенням будь-яких Podʼів. Це дозволяє вам виражати явний намір планування для Job, такий як [групове планування](/docs/concepts/scheduling-eviction/gang-scheduling/) (всі Podʼи плануються разом або жодного), спільне розташування за топологією та поведінку під час порушень.
 
 Коли ви опускаєте `.spec.scheduling`, Job типово використовує політику планування `Basic`, яка зберігає стандартний результат планування Pod за Podʼом для звичайного Job. Контролер все одно створює `Workload` та `PodGroup` для кожного відповідного Job (включно з `Basic`), тому спостережувані обʼєкти є узгодженими незалежно від політики.
 
@@ -275,14 +275,14 @@ kubectl logs jobs/pi
 
 - `schedulingPolicy`: потрібно вказати рівно одне з `basic` або `gang`. З `gang` всі Podʼи мають бути запланованими разом, перш ніж будь-який з них буде привʼязаний. Опущене `gang.minCount` стандартно дорівнює `.spec.parallelism` Job. Див. [Політики планування PodGroup](/docs/concepts/workloads/workload-api/policies/).
 - `schedulingConstraints`: обмеження [спільного розташування за топологією](/docs/concepts/workloads/workload-api/topology-aware-scheduling/) для Podʼів Job.
-- `disruptionMode`: чи переривається робота Podʼів окремо (`single`), чи групою (`all`). Див. [переривання роботи та пріоритет](/docs/concepts/workloads/workload-api/disruption-and-priority/).
+- `disruptionMode`: чи порушується робота Podʼів окремо (`single`), чи групою (`all`). Див. [порушення та пріоритет](/docs/concepts/workloads/workload-api/disruption-and-priority/).
 - `resourceClaims`: динамічні запити на ресурси, спільні для Podʼів Job.
 
 Всі поля `.spec.scheduling` є незмінними після створення Job, окрім `schedulingPolicy.gang.minCount`, яке ви можете змінювати, щоб [еластично масштабувати групу](#elastic-indexed-jobs).
 
 ### Групове планування {#gang-scheduling}
 
-Цей Job запитує групове планування для своїх 8 Podʼів, розташованих в одній зоні, робота яких переривається разом:
+Цей Job запитує групове планування для своїх 8 Podʼів, розташованих в одній зоні, робота яких порушується разом:
 
 ```yaml
 apiVersion: batch/v1
@@ -301,7 +301,7 @@ spec:
       key:
       - level: topology.kubernetes.io/zone
     disruptionMode:
-      all: {}                 # робота всієї групи переривається разом
+      all: {}                 # робота всієї групи порушується разом
   template:
     spec:
       restartPolicy: Never
@@ -453,7 +453,7 @@ kubectl get -o yaml job job-backoff-limit-per-index-example
 У деяких ситуаціях вам може знадобитися кращий контроль обробки збоїв Podʼа, ніж контроль, який надає [Політика backoff для збоїв Podʼа](#pod-backoff-failure-policy), яка базується на `.spec.backoffLimit` Job. Ось деякі приклади використання:
 
 - Для оптимізації витрат на виконання робочих навантажень, уникнення непотрібних перезапусків Podʼа, ви можете завершити Job, як тільки один із його Podʼів відмовить із кодом виходу, що вказує на помилку програмного забезпечення.
-- Щоб гарантувати, що ваш Job завершиться, навіть якщо є переривання роботи, ви можете ігнорувати збої Podʼів, спричинені перериваннями роботи (такими як {{< glossary_tooltip text="витіснення" term_id="preemption" >}}, {{< glossary_tooltip text="виселення, ініційоване API" term_id="api-eviction" >}} або виселення на основі {{< glossary_tooltip text="taint" term_id="taint" >}}), щоб вони не враховувалися в обмеженні спроб `.spec.backoffLimit`.
+- Щоб гарантувати, що ваш Job завершиться, навіть якщо є порушення, ви можете ігнорувати збої Podʼів, спричинені порушеннями (такими як {{< glossary_tooltip text="витіснення" term_id="preemption" >}}, {{< glossary_tooltip text="виселення, ініційоване API" term_id="api-eviction" >}} або виселення на основі {{< glossary_tooltip text="taint" term_id="taint" >}}), щоб вони не враховувалися в обмеженні спроб `.spec.backoffLimit`.
 
 Ви можете налаштувати політику збоїв Podʼа в полі `.spec.podFailurePolicy`, щоб задовольнити наведені вище сценарії використання. Ця політика може обробляти збої Podʼа на основі кодів виходу контейнера та станів Podʼа.
 
@@ -471,7 +471,7 @@ kubectl get -o yaml job job-backoff-limit-per-index-example
 Оскільки в шаблоні Podʼа вказано `restartPolicy: Never`, kubelet не перезапускає контейнер `main` в тому конкретному Podʼі.
 {{< /note >}}
 
-Друге правило політики збоїв Podʼа, що вказує дію `Ignore` для невдалих Podʼів зі станом `DisruptionTarget`, виключає переривання роботи Podʼів із підрахунку обмеження спроб `.spec.backoffLimit`.
+Друге правило політики збоїв Podʼа, що вказує дію `Ignore` для невдалих Podʼів зі станом `DisruptionTarget`, виключає порушення роботи Podʼів із підрахунку обмеження спроб `.spec.backoffLimit`.
 
 {{< note >}}
 Якщо Job виявився невдалим через політику збоїв Podʼа чи через політику backoff для збоїв Podʼа, і Job виконується кількома Podʼами, Kubernetes завершує всі Podʼи в цьому Job, які все ще перебувають у статусах Pending або Running.

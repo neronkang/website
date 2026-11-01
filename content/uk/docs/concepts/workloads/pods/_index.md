@@ -289,7 +289,7 @@ _Проба_ — це діагностика, яку kubelet періодичн
 ## {{% heading "whatsnext" %}} {#whats-next}
 
 * Дізнайтесь про [життєвий цикл Podʼа](/docs/concepts/workloads/pods/pod-lifecycle/).
-* Дізнайтесь про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як ви можете використовувати його для керування доступністю застосунку під час переривань роботи.
+* Дізнайтесь про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як ви можете використовувати його для керування доступністю застосунку під час порушень.
 * Pod є ресурсом найвищого рівня в REST API Kubernetes. Визначення обʼєкта {{< api-reference page="core/pod-v1" >}} детально описує цей обʼєкт.
 * Допис в блозі [The Distributed System Toolkit: Patterns for Composite Containers](/blog/2015/06/the-distributed-system-toolkit-patterns/) пояснює типові конфігурації Podʼів з більш ніж одним контейнером.
 * Дізнайтесь про [Обмеження топології розміщення Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/)

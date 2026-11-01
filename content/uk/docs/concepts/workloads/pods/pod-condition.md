@@ -6,7 +6,7 @@ weight: 35
 
 У Kubernetes багато обʼєктів мають _стани_ (conditions). Стан — це показник певного аспекту фактичного становища того, що представляє обʼєкт. Podʼи мають стани, і стани Podʼів у Kubernetes є важливим аспектом, що дозволяє контролерам (а також тим, хто займається усуненням несправностей) оцінювати справність Podʼів.
 
-[Фаза](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) Podʼа надає високорівневий огляд того, на якому етапі життєвого циклу перебуває Pod, але одне значення не може показати повну картину. Наприклад, Pod може перебувати у фазі `Running`, але не бути готовим до обслуговування трафіку. Стани Podʼа доповнюють фазу, відстежуючи незалежно один від одного різні аспекти статусу Podʼа, наприклад, чи було його заплановано, чи готові його контейнери, чи триває зміна розміру, або чи буде робота Podʼа незабаром перервана через {{< glossary_tooltip text="taint" term_id="taint" >}}.
+[Фаза](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) Podʼа надає високорівневий огляд того, на якому етапі життєвого циклу перебуває Pod, але одне значення не може показати повну картину. Наприклад, Pod може перебувати у фазі `Running`, але не бути готовим до обслуговування трафіку. Стани Podʼа доповнюють фазу, відстежуючи незалежно один від одного різні аспекти статусу Podʼа, наприклад, чи було його заплановано, чи готові його контейнери, чи триває зміна розміру, або чи буде робота Podʼа незабаром порушена через {{< glossary_tooltip text="taint" term_id="taint" >}}.
 
 ## Структура стану Podʼа {#structure-of-a-pod-condition}
 
@@ -115,7 +115,7 @@ Kubelet встановлює стан `PodReadyToStartContainers` в `True` пі
 
 ### DisruptionTarget {#disruption-target}
 
-Спеціальний стан Podʼа `DisruptionTarget` додається для того, щоб вказати, що Pod буде видалено через {{<glossary_tooltip term_id="disruption" text="переривання роботи">}}. Поле `reason` цього стану додатково вказує одну з таких причин завершення Podʼа:
+Спеціальний стан Podʼа `DisruptionTarget` додається для того, щоб вказати, що Pod буде видалено через {{<glossary_tooltip term_id="disruption" text="порушення">}}. Поле `reason` цього стану додатково вказує одну з таких причин завершення Podʼа:
 
 `PreemptionByScheduler`
 : Pod підлягає {{<glossary_tooltip term_id="preemption" text="витісненню">}} планувальником, щоб звільнити місце для нового Podʼа з вищим пріоритетом. Для отримання додаткової інформації див. [Пріоритет та витіснення Podʼів](/docs/concepts/scheduling-eviction/pod-priority-preemption/).
@@ -132,17 +132,17 @@ Kubelet встановлює стан `PodReadyToStartContainers` в `True` пі
 `TerminationByKubelet`
 : Pod було завершено kubelet через {{<glossary_tooltip term_id="node-pressure-eviction" text="виселення внаслідок тиску на вузол">}}, [коректне вимкнення вузла](/docs/concepts/architecture/nodes/#graceful-node-shutdown) або витіснення заради [системно критичних Podʼів](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/).
 
-У всіх інших сценаріях переривання роботи, таких як виселення через перевищення [обмежень контейнерів Podʼа](/docs/concepts/configuration/manage-resources-containers/), Podʼи не отримують стан `DisruptionTarget`, оскільки ці переривання, ймовірно, були спричинені самим Podʼом і повторилися б під час повторної спроби.
+У всіх інших сценаріях порушення, таких як виселення через перевищення [обмежень контейнерів Podʼа](/docs/concepts/configuration/manage-resources-containers/), Podʼи не отримують стан `DisruptionTarget`, оскільки ці порушення, ймовірно, були спричинені самим Podʼом і повторилися б під час повторної спроби.
 
 {{< note >}}
-Процес переривання роботи Podʼа може бути зупинено. Панель управління може повторно спробувати продовжити переривання роботи того самого Podʼа, але це не гарантовано. В результаті стан `DisruptionTarget` може бути додано до Podʼа, але цей Pod може фактично не бути видаленим. У такій ситуації через деякий час стан переривання роботи Podʼа буде очищено.
+Процес порушення роботи Podʼа може бути зупинено. Панель управління може повторно спробувати продовжити порушення роботи того самого Podʼа, але це не гарантовано. В результаті стан `DisruptionTarget` може бути додано до Podʼа, але цей Pod може фактично не бути видаленим. У такій ситуації через деякий час стан порушення роботи Podʼа буде очищено.
 {{< /note >}}
 
 Разом з очищенням Podʼів, механізм збору сміття Podʼів (PodGC) також позначає їх як невдалі, якщо вони перебувають у нетермінальній фазі (див. також [збір сміття Podʼів](/docs/concepts/workloads/pods/pod-lifecycle/#pod-garbage-collection)).
 
-Під час використання Job (або CronJob) ви можете використовувати ці стани переривання роботи Podʼів як частину [політики збоїв Podʼа](/docs/concepts/workloads/controllers/job#pod-failure-policy) вашого Job.
+Під час використання Job (або CronJob) ви можете використовувати ці стани порушення роботи Podʼів як частину [політики збоїв Podʼа](/docs/concepts/workloads/controllers/job#pod-failure-policy) вашого Job.
 
-Для отримання додаткової інформації див. [Переривання роботи](/docs/concepts/workloads/pods/disruptions/).
+Для отримання додаткової інформації див. [Порушення](/docs/concepts/workloads/pods/disruptions/).
 
 ### PodResizePending та PodResizeInProgress {#pod-resize-conditions}
 
@@ -201,6 +201,6 @@ Pod, який використовує власні стани, вважаєть
 ## {{% heading "whatsnext" %}} {#whats-next}
 
 - Дізнайтесь про [Життєвий цикл Podʼа](/docs/concepts/workloads/pods/pod-lifecycle/).
-- Дізнайтесь про [Переривання роботи](/docs/concepts/workloads/pods/disruptions/).
+- Дізнайтесь про [Порушення](/docs/concepts/workloads/pods/disruptions/).
 - Дізнайтесь про [проби контейнерів](/docs/concepts/workloads/pods/probes/) та як вони впливають на готовність Podʼа.
 - Дізнайтесь, як [змінювати ресурси Podʼа на місці](/docs/tasks/configure-pod-container/resize-container-resources/).
