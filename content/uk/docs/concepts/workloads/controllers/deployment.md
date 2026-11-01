@@ -1279,5 +1279,5 @@ Podʼи, що завершують роботу через видалення а
 * Дізнайтеся більше про [Podʼи](/docs/concepts/workloads/pods).
 * [Запустіть stateless-застосунок за допомогою Deployment](/docs/tasks/run-application/run-stateless-application-deployment/).
 * Прочитайте {{< api-reference page="apps/deployment-v1" >}}, щоб зрозуміти API Deployment.
-* Прочитайте про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як ви можете використовувати його для керування доступністю застосунку під час переривань роботи.
+* Прочитайте про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як ви можете використовувати його для керування доступністю застосунку під час порушень.
 * Використовуйте kubectl для [створення Deployment](/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/).
