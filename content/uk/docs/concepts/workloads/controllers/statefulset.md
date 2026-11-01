@@ -363,4 +363,4 @@ spec:
   * Дізнайтеся, як [налаштувати Pod для використання тому для зберігання](/docs/tasks/configure-pod-container/configure-volume-storage/).
   * Дізнайтеся, як [налаштувати Pod для використання PersistentVolume для зберігання](/docs/tutorials/configuration/configure-persistent-volume-storage/).
 * `StatefulSet` є ресурсом верхнього рівня в REST API Kubernetes. Ознайомтесь із визначенням обʼєкта {{< api-reference page="apps/stateful-set-v1" >}}, щоб зрозуміти API для StatefulSets.
-* Дізнайтеся про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як його можна використовувати для керування доступністю застосунків під час переривань роботи.
+* Дізнайтеся про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як його можна використовувати для керування доступністю застосунків під час порушень.
