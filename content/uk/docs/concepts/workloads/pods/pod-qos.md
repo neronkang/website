@@ -134,7 +134,7 @@ memoryReservationPolicy: TieredReservation
 * Дізнайтеся про [керування ресурсами для Podʼів та контейнерів](/docs/concepts/configuration/manage-resources-containers/).
 * Дізнайтеся про [виселення внаслідок тиску на вузол](/docs/concepts/scheduling-eviction/node-pressure-eviction/).
 * Дізнайтеся про [пріоритет Podʼів та витіснення](/docs/concepts/scheduling-eviction/pod-priority-preemption/).
-* Дізнайтеся про [переривання роботи Podʼів](/docs/concepts/workloads/pods/disruptions/).
+* Дізнайтеся про [порушення роботи Podʼів](/docs/concepts/workloads/pods/disruptions/).
 * Дізнайтеся, як [призначати ресурси памʼяті контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-memory-resource/).
 * Дізнайтеся, як [призначати ресурси CPU контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-cpu-resource/).
 * Дізнайтеся, як [налаштовувати якість обслуговування для Podʼів](/docs/tasks/configure-pod-container/quality-service-pod/).
