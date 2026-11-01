@@ -13,7 +13,7 @@ PodGroup — це обʼєкт часу виконання, який предс�
 
 ## Що таке PodGroup? {#what-is-a-podgroup}
 
-Ресурс API PodGroup є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1beta1`, і ваш кластер повинен мати цю групу API увімкненою, а також [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `GenericWorkload`, перш ніж ви зможете використовувати цей API.
+Ресурс API PodGroup є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1beta1`, і ваш кластер повинен мати цю групу API увімкненою, а також функціональну можливість [`GenericWorkload`](/docs/reference/command-line-tools-reference/feature-gates/#GenericWorkload), перш ніж ви зможете використовувати цей API.
 
 PodGroup — це самостійна одиниця планування. Він визначає групу Podʼів, які мають бути заплановані разом, містить політику планування, що регулює розміщення, і фіксує статус часу виконання цього рішення про планування.
 
@@ -94,7 +94,7 @@ spec:
 
 ## Створення PodGroup {#creating-a-podgroup}
 
-Ресурс API PodGroup є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1beta1` (і ваш кластер повинен мати цю групу API увімкненою, а також [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `GenericWorkload`, перш ніж ви зможете використовувати цей API).
+Ресурс API PodGroup є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1beta1` (і ваш кластер повинен мати цю групу API увімкненою, а також функціональну можливість [`GenericWorkload`](/docs/reference/command-line-tools-reference/feature-gates/#GenericWorkload), перш ніж ви зможете використовувати цей API).
 
 Наступний маніфест створює PodGroup з політикою планування gang, яка вимагає, щоб щонайменше 4 Podʼи були придатними для планування одночасно:
 
