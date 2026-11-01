@@ -209,7 +209,7 @@ Taints та tolerations є гнучким способом спрямовува�
 * `node.kubernetes.io/unschedulable`: Вузол непридатний для планування.
 * `node.cloudprovider.kubernetes.io/uninitialized`: Коли kubelet запускається із «зовнішнім» хмарним провайдером, цей taint накладається на вузол, щоб позначити його як непридатний до використання. Після того як контролер з cloud-controller-manager ініціалізує цей вузол, kubelet видаляє цей taint.
 
-Якщо вузол потрібно очистити, контролер вузлів або kubelet додає відповідні taints з ефектом `NoExecute`. Цей ефект стандартно додається для taints `node.kubernetes.io/not-ready` та `node.kubernetes.io/unreachable`. Якщо умова несправності повертається до нормального стану, kubelet або контролер вузлів можуть видалити відповідні taints.
+Якщо вузол потрібно очистити, контролер вузлів або kubelet додає відповідні taints з ефектом `NoExecute`. Цей ефект стандартно додається для taints `node.kubernetes.io/not-ready` та `node.kubernetes.io/unreachable`. Якщо стан несправності повертається до норми, kubelet або контролер вузлів можуть видалити відповідні taints.
 
 У деяких випадках, коли вузол недоступний, API-сервер не може спілкуватися з kubelet на вузлі. Рішення про видалення Podʼів не може бути передане до kubelet, доки звʼязок з API-сервером не буде відновлено. Протягом цього часу Podʼи, які заплановані для видалення, можуть продовжувати працювати на розділеному вузлі.
 
@@ -246,13 +246,13 @@ Podʼи [DaemonSet](/docs/concepts/workloads/controllers/daemonset/) створ�
 Контролер вузлів відповідав за додавання taints до вузлів і виселення Podʼів. Але після 1.29 реалізація виселення на основі taint була переміщена з контролера вузлів в окремий і незалежний компонент під назвою taint-eviction-controller. Користувачі можуть за бажанням вимкнути виселення на основі taint, встановивши `--controllers=-taint-eviction-controller` в kube-controller-manager.
 {{< /note >}}
 
-## Накладання taints на вузли за умовами {#taint-nodes-by-condition}
+## Накладання taints на вузли за станами {#taint-nodes-by-condition}
 
-Панель управління, використовуючи {{<glossary_tooltip text="контролер" term_id="controller">}} вузла, автоматично створює taints з ефектом `NoSchedule` для [умов вузла](/docs/concepts/scheduling-eviction/node-pressure-eviction/#node-conditions).
+Панель управління, використовуючи {{<glossary_tooltip text="контролер" term_id="controller">}} вузла, автоматично створює taints з ефектом `NoSchedule` для [станів вузла](/docs/concepts/scheduling-eviction/node-pressure-eviction/#node-conditions).
 
-Планувальник перевіряє taints, а не умови вузла, коли він приймає рішення про планування. Це забезпечує те, що умови вузла не впливають безпосередньо на планування. Наприклад, якщо умова вузла `DiskPressure` активна, панель управління додає taint `node.kubernetes.io/disk-pressure` і не планує нові Podʼи на уражений вузол. Якщо умова вузла `MemoryPressure` активна, панель управління додає taint `node.kubernetes.io/memory-pressure`.
+Планувальник перевіряє taints, а не стани вузла, коли він приймає рішення про планування. Це забезпечує те, що стани вузла не впливають безпосередньо на планування. Наприклад, якщо стан вузла `DiskPressure` активний, панель управління додає taint `node.kubernetes.io/disk-pressure` і не планує нові Podʼи на уражений вузол. Якщо стан вузла `MemoryPressure` активний, панель управління додає taint `node.kubernetes.io/memory-pressure`.
 
-Ви можете ігнорувати умови вузла для новостворених Podʼів, додавши відповідні tolerations Podʼів. Панель управління також додає toleration `node.kubernetes.io/memory-pressure` на Podʼи, які мають {{< glossary_tooltip text="клас якості обслуговування" term_id="qos-class" >}} інший, ніж `BestEffort`. Це тому, що Kubernetes вважає Podʼи у класах QoS `Guaranteed` або `Burstable` (навіть Podʼи без встановленого запиту на памʼять) здатними впоратися з тиском на памʼять, тоді як нові Podʼи `BestEffort` не плануються на уражений вузол.
+Ви можете ігнорувати стани вузла для новостворених Podʼів, додавши відповідні tolerations Podʼів. Панель управління також додає toleration `node.kubernetes.io/memory-pressure` на Podʼи, які мають {{< glossary_tooltip text="клас якості обслуговування" term_id="qos-class" >}} інший, ніж `BestEffort`. Це тому, що Kubernetes вважає Podʼи у класах QoS `Guaranteed` або `Burstable` (навіть Podʼи без встановленого запиту на памʼять) здатними впоратися з тиском на памʼять, тоді як нові Podʼи `BestEffort` не плануються на уражений вузол.
 
 Контролер DaemonSet автоматично додає наступні tolerations `NoSchedule` для всіх демонів, щоб запобігти порушенню роботи DaemonSets.
 
