@@ -235,7 +235,7 @@ profiles:
 
 {{< note >}}
 <!-- UPDATE THIS WHEN PROMOTING TO STABLE -->
-Поле `matchLabelKeys` перебуває на рівні бета-версії та є стандартно увімкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви бажаєте його вимкнути, вам потрібно зробити це явним чином за допомогою вимкнення [функціональної можливості](/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodAffinity`.
+Поле `matchLabelKeys` перебуває на рівні бета-версії та є стандартно увімкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви бажаєте його вимкнути, вам потрібно зробити це явним чином за допомогою вимкнення функціональної можливості [`MatchLabelKeysInPodAffinity`](/docs/reference/command-line-tools-reference/feature-gates/#MatchLabelKeysInPodAffinity).
 {{< /note >}}
 
 У Kubernetes є необовʼязкове поле `matchLabelKeys` для спорідненості або антиспорідненості Podʼа. Це поле вказує ключі для міток, які повинні відповідати міткам вхідного Podʼа під час задоволення спорідненості (антиспорідненості) Podʼа.
@@ -280,7 +280,7 @@ spec:
 
 {{< note >}}
 <!-- UPDATE THIS WHEN PROMOTING TO STABLE -->
-Поле `mismatchLabelKeys` перебуває на рівні бета-версії та є стандартно увімкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви бажаєте його вимкнути, вам потрібно зробити це явним чином за допомогою вимкнення [функціональної можливості](/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodAffinity`.
+Поле `mismatchLabelKeys` перебуває на рівні бета-версії та є стандартно увімкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви бажаєте його вимкнути, вам потрібно зробити це явним чином за допомогою вимкнення функціональної можливості [`MatchLabelKeysInPodAffinity`](/docs/reference/command-line-tools-reference/feature-gates/#MatchLabelKeysInPodAffinity).
 {{< /note >}}
 
 Kubernetes включає необовʼязкове поле `mismatchLabelKeys` для спорідненості або антиспорідненості Podʼа. Це поле вказує ключі для міток, які не повинні мати збігу з мітками вхідного Podʼа, під час задоволення спорідненості чи антиспорідненості Podʼа.
