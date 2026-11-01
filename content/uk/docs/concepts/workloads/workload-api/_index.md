@@ -30,10 +30,10 @@ simple_list: true
 1. Унікальне поле `name`, яке буде використовуватися для посилання на шаблон у `spec.podGroupTemplateRef` обʼєкта `PodGroup`.
 2. [Політику планування](/docs/concepts/workloads/workload-api/policies/) (`basic` або `gang`).
 
-Кожен елемент також може мати поля [пріоритету та режиму переривання роботи](/docs/concepts/workloads/workload-api/disruption-and-priority/).
+Кожен елемент також може мати поля [пріоритету та режиму порушення](/docs/concepts/workloads/workload-api/disruption-and-priority/).
 
 {{< note >}}
-У v1.36 поля [пріоритету та режиму переривання роботи](/docs/concepts/workloads/workload-api/disruption-and-priority/) вмикалися функціональною можливістю [`WorkloadAwarePreemption`](/docs/reference/command-line-tools-reference/feature-gates/#WorkloadAwarePreemption). Цю функціональну можливість було обʼєднано з [`GenericWorkload`](/docs/reference/command-line-tools-reference/feature-gates/#GenericWorkload) у v1.37.
+У v1.36 поля [пріоритету та режиму порушення](/docs/concepts/workloads/workload-api/disruption-and-priority/) вмикалися функціональною можливістю [`WorkloadAwarePreemption`](/docs/reference/command-line-tools-reference/feature-gates/#WorkloadAwarePreemption). Цю функціональну можливість було обʼєднано з [`GenericWorkload`](/docs/reference/command-line-tools-reference/feature-gates/#GenericWorkload) у v1.37.
 {{< /note >}}
 
 Максимальна кількість PodGroupTemplates в одному Workload становить 8.
@@ -70,7 +70,7 @@ spec:
 
 {{< feature-state feature_gate_name="CompositePodGroup" >}}
 
-Коли увімкнено функціональну можливість [`CompositePodGroup`](/docs/reference/command-line-tools-reference/feature-gates/#CompositePodGroup) та {{< glossary_tooltip text="групу API" term_id="api-group" >}} `scheduling.k8s.io/v1alpha3`, ви можете використовувати `CompositePodGroupTemplates` для визначення багаторівневих ієрархічних вимог до планування у `Workload`. Ці вимоги можуть включати забезпечення вкладених топологічних обмежень на різних рівнях інфраструктури кластера (багаторівневе топологічно орієнтоване планування), планування «все або нічого» для дочірніх груп (багаторівневе групове планування) або політики переривання роботи на рівні групи.
+Коли увімкнено функціональну можливість [`CompositePodGroup`](/docs/reference/command-line-tools-reference/feature-gates/#CompositePodGroup) та {{< glossary_tooltip text="групу API" term_id="api-group" >}} `scheduling.k8s.io/v1alpha3`, ви можете використовувати `CompositePodGroupTemplates` для визначення багаторівневих ієрархічних вимог до планування у `Workload`. Ці вимоги можуть включати забезпечення вкладених топологічних обмежень на різних рівнях інфраструктури кластера (багаторівневе топологічно орієнтоване планування), планування «все або нічого» для дочірніх груп (багаторівневе групове планування) або політики порушення на рівні групи.
 
 `CompositePodGroupTemplates` можна визначити за допомогою поля `spec.compositePodGroupTemplates` в API `Workload`. Під час виконання контролери робочого навантаження створюють обʼєкти [CompositePodGroup](/docs/concepts/workloads/compositepodgroup-api/) та [PodGroup](/docs/concepts/workloads/podgroup-api/) з цих шаблонів для підтримки стану планування ієрархії під час виконання. У той час як обʼєкти `PodGroup` керують групами Podʼів на кінцевих рівнях, обʼєкти `CompositePodGroup` представляють проміжні групи, які забезпечують виконання політик планування для дочірніх груп.
 
@@ -87,7 +87,7 @@ spec:
   - `basic`: дочірні групи приймаються та плануються незалежно.
   - `gang`: забезпечує багаторівневе планування «все або нічого» для дочірніх груп. Вимагає `minGroupCount`, який визначає мінімальну кількість дочірніх груп, які мають бути придатними для планування одночасно, щоб складена група була здійсненною.
 - **Обмеження планування**: необовʼязкові [топологічні обмеження](/docs/concepts/workloads/workload-api/topology-aware-scheduling/) для багаторівневого топологічно орієнтованого планування.
-- **Пріоритет, політика витіснення та режим переривання роботи**: необовʼязкові `priorityClassName`, `disruptionMode` (`Single` або `All`) та `preemptionPolicy` для [витіснення з урахуванням робочого навантаження](/docs/concepts/workloads/workload-api/disruption-and-priority/).
+- **Пріоритет, політика витіснення та режим порушення**: необовʼязкові `priorityClassName`, `disruptionMode` (`Single` або `All`) та `preemptionPolicy` для [витіснення з урахуванням робочого навантаження](/docs/concepts/workloads/workload-api/disruption-and-priority/).
 
 Щоб забезпечити стабільність кластера та ефективність панелі управління, ієрархія шаблонів груп застосовує такі обмеження:
 
