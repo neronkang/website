@@ -26,7 +26,7 @@ no_list: true
 * [Descheduler](https://github.com/kubernetes-sigs/descheduler#descheduler-for-kubernetes)
 * [Можливості, оголошені вузлом](/docs/concepts/scheduling-eviction/node-declared-features/)
 
-## Переривання роботи Podʼів {#pod-disruption}
+## Порушення роботи Podʼів {#pod-disruption}
 
 {{<glossary_definition term_id="pod-disruption" length="all">}}
 
