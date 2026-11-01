@@ -44,9 +44,9 @@ spec:
       podGroupTemplateName: worker
 ```
 
-### Пріоритет і режим переривання роботи {#priority-and-disruption-mode}
+### Пріоритет і режим порушення {#priority-and-disruption-mode}
 
-Кожен PodGroup також може визначати власні `spec.priority`, `spec.preemptionPolicy` та `spec.disruptionMode`. Пріоритет і політика витіснення встановлюються за допомогою поля `spec.priorityClassName`, яке вказує на ресурс `PriorityClass`. Див. [Переривання роботи та пріоритет групи Podʼів](/docs/concepts/workloads/workload-api/disruption-and-priority/) для детального опису цих полів.
+Кожен PodGroup також може визначати власні `spec.priority`, `spec.preemptionPolicy` та `spec.disruptionMode`. Пріоритет і політика витіснення встановлюються за допомогою поля `spec.priorityClassName`, яке вказує на ресурс `PriorityClass`. Див. [Порушення та пріоритет групи Podʼів](/docs/concepts/workloads/workload-api/disruption-and-priority/) для детального опису цих полів.
 
 Коли контролер робочого навантаження створює PodGroup, ці поля копіюються з PodGroupTemplate обʼєкта Workload під час створення. Для автономних PodGroups ви встановлюєте поля безпосередньо.
 
@@ -175,7 +175,7 @@ Workload виступає як довговічне визначення пол�
 
 {{< feature-state feature_gate_name="CompositePodGroup" >}}
 
-Коли функціональну можливість [`CompositePodGroup`](/docs/reference/command-line-tools-reference/feature-gates/#CompositePodGroup) увімкнено, `PodGroup` може діяти як кінцевий вузол у багаторівневій ієрархії груп, що складається з `PodGroups` та `CompositePodGroups`. `PodGroup` може вказати свою батьківську групу за допомогою поля `spec.parentCompositePodGroupName`. Організація робочого навантаження в ієрархію груп може використовуватися для вираження багаторівневих вимог групового планування, багаторівневих обмежень топології та спільної долі під час переривання роботи для частин робочого навантаження.
+Коли функціональну можливість [`CompositePodGroup`](/docs/reference/command-line-tools-reference/feature-gates/#CompositePodGroup) увімкнено, `PodGroup` може діяти як кінцевий вузол у багаторівневій ієрархії груп, що складається з `PodGroups` та `CompositePodGroups`. `PodGroup` може вказати свою батьківську групу за допомогою поля `spec.parentCompositePodGroupName`. Організація робочого навантаження в ієрархію груп може використовуватися для вираження багаторівневих вимог групового планування, багаторівневих обмежень топології та спільної долі під час порушення для частин робочого навантаження.
 
 Для отримання додаткових відомостей про ієрархічні структури груп та багаторівневе групове планування див. огляд [CompositePodGroup API](/docs/concepts/workloads/compositepodgroup-api/).
 
