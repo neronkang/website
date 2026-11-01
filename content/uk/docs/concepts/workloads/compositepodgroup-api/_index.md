@@ -15,7 +15,7 @@ no_list: true
 
 Ресурс API `CompositePodGroup` є частиною {{< glossary_tooltip text="групи API" term_id="api-group" >}} `scheduling.k8s.io/v1alpha3`. Ваш кластер повинен мати цю групу API увімкненою, а також функціональну можливість [`CompositePodGroup`](/docs/reference/command-line-tools-reference/feature-gates/#CompositePodGroup), перш ніж ви зможете використовувати цей API.
 
-`CompositePodGroup` представляє групування дочірніх груп (які можуть бути обʼєктами `CompositePodGroup` або `PodGroup`). Він містить політики планування, режими переривання роботи, налаштування пріоритету та необовʼязкові топологічні обмеження, які застосовуються колективно до його дочірніх груп.
+`CompositePodGroup` представляє групування дочірніх груп (які можуть бути обʼєктами `CompositePodGroup` або `PodGroup`). Він містить політики планування, режими порушення, налаштування пріоритету та необовʼязкові топологічні обмеження, які застосовуються колективно до його дочірніх груп.
 
 ## Структура API {#api-structure}
 
