@@ -59,7 +59,7 @@ Kubelet використовує такі сигнали виселення:
 
 {{< note >}}
 {{< feature-state feature_gate_name="HugepageAwareEviction" >}}
-На вузлах із налаштованими [hugepages](/docs/tasks/manage-hugepages/scheduling-hugepages/) kubelet віднімає загальну місткість hugepages вузла від `memory.available`, яку використовує менеджер виселення. Без цього коригування зарезервована під hugepages оперативна памʼять завищує `AvailableBytes`, оскільки контролер cgroup памʼяті не відстежує виділення hugetlb у своєму робочому наборі. Це може затримати виселення та призвести до OOM-завершень. Щоб відновити попередню поведінку, вимкніть [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `HugepageAwareEviction`.
+На вузлах із налаштованими [hugepages](/docs/tasks/manage-hugepages/scheduling-hugepages/) kubelet віднімає загальну місткість hugepages вузла від `memory.available`, яку використовує менеджер виселення. Без цього коригування зарезервована під hugepages оперативна памʼять завищує `AvailableBytes`, оскільки контролер cgroup памʼяті не відстежує виділення hugetlb у своєму робочому наборі. Це може затримати виселення та призвести до OOM-завершень. Щоб відновити попередню поведінку, вимкніть функціональну можливість [`HugepageAwareEviction`](/docs/reference/command-line-tools-reference/feature-gates/#HugepageAwareEviction).
 {{</note>}}
 
 На Windows-вузлах значення `memory.available` отримується з глобального рівня комітів памʼяті вузла (запитується через системний виклик [`GetPerformanceInfo()`](https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getperformanceinfo)) шляхом віднімання глобального значення [`CommitTotal`](https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-performance_information) від [`CommitLimit`](https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-performance_information) вузла. Зверніть увагу, що значення `CommitLimit` може змінюватися, якщо змінюється розмір файлу підкачки вузла!
@@ -78,7 +78,7 @@ Kubelet розпізнає три конкретні ідентифікатор�
 
 {{< note >}}
 {{< feature-state feature_gate_name="KubeletSeparateDiskGC" >}}
-Можливість _split image filesystem_ додає нові сигнали виселення, пороги та метрики для `containerfs`. Щоб використовувати `containerfs`, у випуску Kubernetes v{{< skew currentVersion >}} потрібно увімкнути [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `KubeletSeparateDiskGC`. Для Kubernetes v{{< skew currentVersion >}} підтримку файлової системи `containerfs` пропонує лише CRI-O (v1.29 або вище). {{</note>}}
+Можливість _split image filesystem_ додає нові сигнали виселення, пороги та метрики для `containerfs`. Щоб використовувати `containerfs`, у випуску Kubernetes v{{< skew currentVersion >}} потрібно увімкнути функціональну можливість [`KubeletSeparateDiskGC`](/docs/reference/command-line-tools-reference/feature-gates/#KubeletSeparateDiskGC). Для Kubernetes v{{< skew currentVersion >}} підтримку файлової системи `containerfs` пропонує лише CRI-O (v1.29 або вище). {{</note>}}
 
 Kubelet підтримує три поширені схеми розміщення файлових систем контейнерів:
 
