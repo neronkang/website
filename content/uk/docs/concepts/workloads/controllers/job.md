@@ -265,7 +265,7 @@ kubectl logs jobs/pi
 
 {{< feature-state feature_gate_name="WorkloadWithJob" >}}
 
-Коли функціональну можливість [`WorkloadWithJob`](/docs/reference/command-line-tools-reference/feature-gates/) увімкнено, контролер Job компілює конфігурацію `.spec.scheduling` Job в обʼєкти [Workload](/docs/concepts/workloads/workload-api/) та [PodGroup](/docs/concepts/workloads/podgroup-api/) (`scheduling.k8s.io/v1beta1`) перед створенням будь-яких Podʼів. Це дозволяє вам виражати явний намір планування для Job, такий як [групове планування](/docs/concepts/scheduling-eviction/gang-scheduling/) (всі Podʼи плануються разом або жодного), спільне розташування за топологією та поведінку під час переривань роботи.
+Коли функціональну можливість [`WorkloadWithJob`](/docs/reference/command-line-tools-reference/feature-gates/#WorkloadWithJob) увімкнено, контролер Job компілює конфігурацію `.spec.scheduling` Job в обʼєкти [Workload](/docs/concepts/workloads/workload-api/) та [PodGroup](/docs/concepts/workloads/podgroup-api/) (`scheduling.k8s.io/v1beta1`) перед створенням будь-яких Podʼів. Це дозволяє вам виражати явний намір планування для Job, такий як [групове планування](/docs/concepts/scheduling-eviction/gang-scheduling/) (всі Podʼи плануються разом або жодного), спільне розташування за топологією та поведінку під час переривань роботи.
 
 Коли ви опускаєте `.spec.scheduling`, Job типово використовує політику планування `Basic`, яка зберігає стандартний результат планування Pod за Podʼом для звичайного Job. Контролер все одно створює `Workload` та `PodGroup` для кожного відповідного Job (включно з `Basic`), тому спостережувані обʼєкти є узгодженими незалежно від політики.
 
