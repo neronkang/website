@@ -121,7 +121,7 @@ spec:
    * повні назви пристроїв CDI
 
    {{< note >}}
-   Обробка повних назв пристроїв CDI менеджером пристроїв потребує, щоб [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `DevicePluginCDIDevices` було увімкнено і для kubelet, і для kube-apiserver. Її було додано як альфа-можливість у Kubernetes v1.28, вона перейшла до бета у v1.29 і до GA у v1.31.
+   Обробка повних назв пристроїв CDI менеджером пристроїв потребує, щоб функціональну можливість [`DevicePluginCDIDevices`](/docs/reference/command-line-tools-reference/feature-gates-removed/#DevicePluginCDIDevices) було увімкнено і для kubelet, і для kube-apiserver. Її було додано як альфа-можливість у Kubernetes v1.28, вона перейшла до бета у v1.29 і до GA у v1.31.
    {{< /note >}}
 
 ### Обробка перезапусків kubelet {#handling-kubelet-restarts}
