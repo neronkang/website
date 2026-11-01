@@ -149,11 +149,11 @@ Deployment створює заміну для `pod-b` з назвою `pod-e`. �
 - типу контролера
 - місткості ресурсів кластера
 
-## Умови переривання роботи Podʼа {#pod-disruption-conditions}
+## Стани переривання роботи Podʼа {#pod-disruption-conditions}
 
 {{< feature-state feature_gate_name="PodDisruptionConditions" >}}
 
-Спеціальна [умова](/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) Podʼа `DisruptionTarget` додається для того, щоб вказати, що Pod буде видалено через {{<glossary_tooltip term_id="disruption" text="переривання роботи">}}. Поле `reason` цієї умови додатково вказує одну з таких причин завершення Podʼа:
+Спеціальний [стан](/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) Podʼа `DisruptionTarget` додається для того, щоб вказати, що Pod буде видалено через {{<glossary_tooltip term_id="disruption" text="переривання роботи">}}. Поле `reason` цього стану додатково вказує одну з таких причин завершення Podʼа:
 
 `PreemptionByScheduler`
 : Pod має бути {{<glossary_tooltip term_id="preemption" text="витіснений">}} планувальником, щоб звільнити місце для нового Podʼа з вищим пріоритетом. Докладніше дивіться [Витіснення за пріоритетом Podʼа](/docs/concepts/scheduling-eviction/pod-priority-preemption/).
@@ -170,15 +170,15 @@ Deployment створює заміну для `pod-b` з назвою `pod-e`. �
 `TerminationByKubelet`
 : Pod було завершено kubelet через {{<glossary_tooltip term_id="node-pressure-eviction" text="виселення внаслідок тиску на вузол">}}, [коректне вимкнення вузла](/docs/concepts/architecture/nodes/#graceful-node-shutdown) або витіснення заради [системно критичних Podʼів](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/).
 
-У всіх інших сценаріях переривання роботи, таких як виселення через перевищення [обмежень контейнерів Podʼа](/docs/concepts/configuration/manage-resources-containers/), Podʼи не отримують умову `DisruptionTarget`, оскільки ці переривання, ймовірно, були спричинені самим Podʼом і повторилися б під час повторної спроби.
+У всіх інших сценаріях переривання роботи, таких як виселення через перевищення [обмежень контейнерів Podʼа](/docs/concepts/configuration/manage-resources-containers/), Podʼи не отримують стан `DisruptionTarget`, оскільки ці переривання, ймовірно, були спричинені самим Podʼом і повторилися б під час повторної спроби.
 
 {{< note >}}
-Процес переривання роботи Podʼа може бути зупинено. Панель управління може повторно спробувати продовжити переривання роботи того самого Podʼа, але це не гарантовано. В результаті умову `DisruptionTarget` може бути додано до Podʼа, але цей Pod може фактично не бути видаленим. У такій ситуації через деякий час умову переривання роботи Podʼа буде очищено.
+Процес переривання роботи Podʼа може бути зупинено. Панель управління може повторно спробувати продовжити переривання роботи того самого Podʼа, але це не гарантовано. В результаті стан `DisruptionTarget` може бути додано до Podʼа, але цей Pod може фактично не бути видаленим. У такій ситуації через деякий час стан переривання роботи Podʼа буде очищено.
 {{< /note >}}
 
 Разом з очищенням Podʼів механізм збору сміття Podʼів (PodGC) також позначає їх як невдалі, якщо вони перебувають у нетермінальній фазі (див. також [збір сміття Podʼів](/docs/concepts/workloads/pods/pod-lifecycle/#pod-garbage-collection)).
 
-Під час використання Job (або CronJob) ви можете використовувати ці умови переривання роботи Podʼів як частину [політики збоїв Podʼа](/docs/concepts/workloads/controllers/job#pod-failure-policy) вашого Job.
+Під час використання Job (або CronJob) ви можете використовувати ці стани переривання роботи Podʼів як частину [політики збоїв Podʼа](/docs/concepts/workloads/controllers/job#pod-failure-policy) вашого Job.
 
 ## Розділення ролей власника кластера та власника застосунку {#separating-cluster-owner-and-application-owner-roles}
 
